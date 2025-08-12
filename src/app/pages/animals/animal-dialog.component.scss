@@ -1,0 +1,14 @@
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  padding-top: 6px;
+}
+.checks {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-top: 6px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,76 @@
+.shell {
+  height: 100vh;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 8px 16px;
+
+  &__logo { font-size: 28px; }
+  &__text { font: var(--mat-sys-title-large); }
+}
+
+.shell__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  a {
+    text-decoration: none;
+    color: var(--mat-sys-primary);
+  }
+}
+
+.shell__toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.title {
+  margin-left: 8px;
+  font: var(--mat-sys-title-large);
+}
+
+.page {
+  padding: 16px;
+}
+
+/* Aktif link vurgusu */
+a.active {
+  background: color-mix(in srgb, var(--mat-sys-primary) 12%, transparent);
+}
+
+/* Sidenav nav list: ikon ve yazı hizasını standartlaştır */
+.shell__sidenav mat-nav-list { padding: 8px; }
+
+.shell__sidenav a.mat-mdc-list-item {
+  height: 44px;               /* tüm satırlar aynı yükseklik */
+  margin: 4px 8px;
+  border-radius: 12px;
+}
+
+/* Ikon alanı sabit genişlikte olsun (hiza bozulmasın) */
+.shell__sidenav a .mdc-list-item__start {
+  min-width: 40px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+/* Ikon boyutu/metin hizası */
+.shell__sidenav mat-icon[matListItemIcon] {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Aktif ve hover durumları */
+.shell__sidenav a.active {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+.shell__sidenav a.mat-mdc-list-item:hover {
+  background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+}
+
