@@ -1,0 +1,76 @@
+<div class="page-pad" *ngIf="animal() as a">
+  <div class="header">
+    <button mat-button (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+
+    <h1 class="title">
+      {{ a.name }}
+      <small>• {{ a.type }} • {{ a.gender }} • {{ a.diet }}</small>
+    </h1>
+  </div>
+
+  <mat-card>
+    <mat-tab-group>
+      <mat-tab label="Overview">
+        <div class="tab-pad">
+          <div class="kv">
+            <div><strong>Age:</strong> {{ a.age }}</div>
+            <div><strong>Color:</strong> {{ a.color }}</div>
+            <div><strong>Abilities:</strong>
+              <ng-container>
+                <mat-icon *ngIf="a.canWalk" aria-label="Walk">directions_walk</mat-icon>
+                <mat-icon *ngIf="a.canSwim" aria-label="Swim">pool</mat-icon>
+                <mat-icon *ngIf="a.canFly"  aria-label="Fly">flight</mat-icon>
+                <span *ngIf="!a.canWalk && !a.canSwim && !a.canFly">None</span>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+<mat-tab label="Feeding">
+  <div class="tab-pad">
+    <div class="feeding-header">
+      <button mat-flat-button color="primary" (click)="addFeeding()">
+        <mat-icon>add</mat-icon>
+        Add Feeding
+      </button>
+    </div>
+    
+    <mat-list *ngIf="feedings().length > 0; else empty">
+      <mat-list-item *ngFor="let f of feedings()">
+        <div matLine><strong>{{ f.timeOfDay }}</strong> – {{ f.food }} ({{ f.portion }})</div>
+        <div matLine *ngIf="f.notes">{{ f.notes }}</div>
+      </mat-list-item>
+    </mat-list>
+
+    <ng-template #empty>
+      <p>No feeding schedules available.</p>
+    </ng-template>
+  </div>
+</mat-tab>
+
+<mat-tab label="Health">
+  <div class="tab-pad">
+      <button mat-flat-button color="primary" (click)="addHealth()" style="margin-bottom: 12px;">
+        <mat-icon>add</mat-icon>
+        Add Health Record
+      </button>
+    <ng-container *ngIf="healthRecords().length > 0; else emptyHealth">
+      <div *ngFor="let h of healthRecords()" class="health-card">
+        <div class="card-header">
+          <span class="date">{{ h.recordDate }}</span>
+          <span class="type">{{ h.type }}</span>
+        </div>
+        <div class="description">{{ h.description }}</div>
+        <div class="vet">👩‍⚕️ {{ h.veterinarianName }}</div>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyHealth>
+      <p>No health records found.</p>
+    </ng-template>
+  </div>
+</mat-tab>

@@ -7,14 +7,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { Diet, Gender, AnimalCreate, Animal } from '../../models/animal.model';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+
+
 
 type DialogData = {mode: 'create' | 'edit'; animal?: Animal};
 
 @Component({
   standalone: true,
   imports: [
-    ReactiveFormsModule, NgFor,
+    ReactiveFormsModule, NgFor, NgIf,
     MatDialogModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatCheckboxModule, MatButtonModule
   ],

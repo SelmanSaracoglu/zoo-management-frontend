@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AnimalsApiService } from '../../core/api/animals-api.service';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../shared/ui/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 
 
@@ -52,6 +53,7 @@ export class AnimalsPage implements OnInit,AfterViewInit{
   private api = inject(AnimalsApiService);
   private dialog = inject(MatDialog);
   private snack = inject(SnackbarService);
+  private router = inject(Router);
 
     ngOnInit(): void {
     this.reload();
@@ -171,6 +173,10 @@ export class AnimalsPage implements OnInit,AfterViewInit{
       });
     });
   }
+
+  openDetails(a: Animal): void {
+  this.router.navigate(['/animals', a.id]);
+}
 }
 
     

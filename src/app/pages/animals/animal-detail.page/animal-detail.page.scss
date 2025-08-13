@@ -1,0 +1,81 @@
+.page-pad { padding: 16px; }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0;
+  font: var(--mat-sys-headline-small);
+}
+.title small {
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-outline);
+  margin-left: 6px;
+}
+
+.tab-pad { padding: 16px; }
+
+.kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.loading {
+  padding: 24px;
+  color: var(--mat-sys-outline);
+}
+
+.feeding-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.health-card {
+  background: #fafafa;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.card-header .date {
+  color: #444;
+}
+
+.card-header .type {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.description {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.vet {
+  font-size: 13px;
+  color: #777;
+}
+
+button {
+  margin-bottom: 12px;
+}

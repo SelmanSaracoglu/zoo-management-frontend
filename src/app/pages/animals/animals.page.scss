@@ -20,3 +20,12 @@ td mat-icon { vertical-align: middle; margin-right: 4px; }
   min-height: 160px; color: var(--mat-sys-outline);
 }
 .empty mat-icon { font-size: 40px; }
+
+a.link {
+  color: var(--mat-sys-primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+a.link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add Feeding Schedule</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill" class="full">
+    <mat-label>Time of Day</mat-label>
+    <input matInput type="time" formControlName="timeOfDay" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full">
+    <mat-label>Food</mat-label>
+    <input matInput formControlName="food" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full">
+    <mat-label>Portion</mat-label>
+    <input matInput formControlName="portion" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full">
+    <mat-label>Notes</mat-label>
+    <textarea matInput formControlName="notes"></textarea>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+  </div>
+</form>

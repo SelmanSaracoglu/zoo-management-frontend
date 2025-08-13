@@ -15,6 +15,10 @@ export class AnimalsApiService {
     return this.api.get<Animal[]>(this.base);
   }
 
+  getById(id:number): Observable<Animal> {
+    return this.api.get<Animal>(`${this.base}/${id}`)
+  }
+
   /** POST /api/animals */
   create(body: AnimalCreate): Observable<Animal> {
     return this.api.post<Animal>(this.base,body)

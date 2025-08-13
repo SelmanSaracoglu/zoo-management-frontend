@@ -54,8 +54,6 @@ export class App implements OnInit {
   nav = signal<NavItem[]>([
     { label: 'Dashboard', icon: 'dashboard', path: '/' },
     { label: 'Animals',   icon: 'pets',      path: '/animals' },
-    { label: 'Feeding',   icon: 'restaurant',path: '/feeding' },
-    { label: 'Health',    icon: 'vaccines',  path: '/health' },
     { label: 'Staff',     icon: 'groups',    path: '/staff' },
   ]);
 }
