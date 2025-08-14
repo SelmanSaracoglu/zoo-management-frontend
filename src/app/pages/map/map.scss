@@ -1,0 +1,47 @@
+.zoo-map {
+  padding: 1rem;
+
+  header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    justify-items: center;
+  }
+
+  .map-cell {
+    width: 100%;
+    padding: 1rem;
+    background-color: #e0f7fa;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .entrance,
+  .exit {
+    background-color: #b2dfdb;
+  }
+
+  .food {
+    background-color: #ffe082;
+  }
+
+  .show {
+    background-color: #ce93d8;
+  }
+
+  .kids {
+    background-color: #f8bbd0;
+  }
+}

@@ -1,3 +1,16 @@
+<section class="hero-banner" aria-label="Zoo Welcome Banner">
+  <div class="overlay">
+    <div class="hero-text">
+      <h1>Welcome to WildLand Zoo 🐾</h1>
+      <p>Discover amazing animals, join exciting programs, and plan your next adventure today!</p>
+      <div class="actions">
+        <button mat-raised-button color="accent" [routerLink]="'/programs'">Explore Programs</button>
+        <button mat-stroked-button color="primary" [routerLink]="'/login'">Staff Login</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="home-container">
   <h1>Welcome to Caps-Zoo</h1>
 
@@ -67,22 +80,22 @@
         <p>Open daily from 9 AM to 6 PM. Closed on public holidays.</p>
       </mat-card>
 
-      <mat-card class="info-card">
+      <mat-card class="info-card" [routerLink]="'/events'" role="link" aria-label="Go to Events Page">
         <mat-icon>event</mat-icon>
         <h3>Upcoming Events</h3>
-        <p>“Boo at the Zoo” starts next week. Summer camps coming soon!</p>
+        <p>Discover weekly shows like elephant feeding, lion roars, and more!</p>
       </mat-card>
 
-      <mat-card class="info-card">
+      <mat-card class="info-card" [routerLink] = "'/programs'" role="link" aria-label="Go to Programs Page">
         <mat-icon>people</mat-icon>
         <h3>Keeper for a Day</h3>
         <p>Join our educational program for families and students.</p>
       </mat-card>
 
-      <mat-card class="info-card">
+      <mat-card class="info-card" [routerLink]="'/map'" role="link" aria-label="Go to Zoo Map Page">
         <mat-icon>map</mat-icon>
-        <h3>Interactive Zoo Map</h3>
-        <p>Plan your visit with our new interactive map — coming soon.</p>
+        <h3>Zoo Map</h3>
+        <p>Explore the layout and locations inside the zoo.</p>
       </mat-card>
     </div>
   </section>

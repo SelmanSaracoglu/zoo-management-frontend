@@ -1,0 +1,25 @@
+.about-container {
+  text-align: center;
+  padding: 2rem;
+
+  img {
+    max-width: 800px;  // Görsel genişliğini sınırladık
+    width: 100%;       // Ekrana göre duyarlı olsun
+    height: auto;      // Oranı bozulmasın
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // Hafif gölge
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
