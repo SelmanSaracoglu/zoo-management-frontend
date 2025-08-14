@@ -10,6 +10,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgIf } from '@angular/common';
 import { LoadingService } from './core/ui/loading.service';
 import { filter, map } from 'rxjs';
+import { MainLayout } from './layout/main-layout/main-layout';
 
 
 type NavItem = { label: string; icon: string; path: string };
@@ -21,7 +22,7 @@ type NavItem = { label: string; icon: string; path: string };
     RouterOutlet, RouterLink, RouterLinkActive,
     MatToolbarModule, MatSidenavModule, MatListModule,
     MatIconModule, MatButtonModule, MatDividerModule, 
-    MatProgressBarModule, NgIf
+    MatProgressBarModule, NgIf, MainLayout
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']

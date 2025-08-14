@@ -1,0 +1,25 @@
+.footer-content {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  background-color: #212121;
+
+  p {
+    margin: 0.3rem 0;
+  }
+
+  .social-links {
+    margin-top: 0.7rem;
+
+    a {
+      margin: 0 0.5rem;
+      color: #ccc;
+      font-size: 24px;
+
+      &:hover {
+        color: #ffca28; // sarımsı etki
+      }
+    }
+  }
+}

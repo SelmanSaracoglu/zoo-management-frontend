@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" class="header-toolbar">
+    <span class="title">Zoo Management</span>
+        <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        <a mat-button routerLink="/animals" routerLinkActive="active">Animals</a>
+        <a mat-button routerLink="/staff" routerLinkActive="active">Staff</a>
+
+    <span class="spacer"></span>
+        <a mat-button class="login-btn" routerLink="/auth/login">Login</a>
+        <a mat-button class="register-btn" routerLink="/auth/register">Register</a>
+</mat-toolbar>
+
