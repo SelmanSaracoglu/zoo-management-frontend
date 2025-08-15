@@ -1,0 +1,14 @@
+<ng-container *ngIf="animal">
+  <mat-card class="animal-detail-card">
+    <img mat-card-image [src]="animal.imageUrl" [alt]="animal.name" />
+    <mat-card-title>{{ animal.name }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Species:</strong> {{ animal.species }}</p>
+      <p><strong>Category:</strong> {{ animal.category }}</p>
+      <p><strong>Habitat:</strong> {{ animal.habitat }}</p>
+      <p><strong>Diet:</strong> {{ animal.diet }}</p>
+      <p><strong>Origin:</strong> {{ animal.origin_country }}</p>
+      <p>{{ animal.description }}</p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
