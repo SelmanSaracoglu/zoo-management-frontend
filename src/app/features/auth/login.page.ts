@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
 import { I } from '@angular/cdk/keycodes';
 
 @Component({
+  selector: 'app-login',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   imports: [
@@ -20,17 +20,20 @@ import { I } from '@angular/cdk/keycodes';
 })
 
 export class LoginPage {
-    private fb = inject(FormBuilder);
-    private router = inject(Router);
+  loginForm: FormGroup;
 
-    form: FormGroup = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required]
-    })
+  constructor(private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
-    login(): void{
-        if (this.form.valid) {
-            this.router.navigate(['/'])
-        }
+  onSubmit() {
+    if (this.loginForm.valid) {
+      console.log('Form values:', this.loginForm.value);
+    }else{
+      console.log('Form invalid');
     }
+  }
 }

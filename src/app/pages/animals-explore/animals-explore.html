@@ -1,0 +1,12 @@
+<section class="animals-section" aria-label="Zoo Animals">
+  <h1>Explore Our Animals</h1>
+  <div class="animal-grid">
+    <mat-card *ngFor="let animal of animals" class="animal-card">
+      <img mat-card-image [src]="animal.image" [alt]="animal.name" />
+      <mat-card-title>{{ animal.name }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ animal.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

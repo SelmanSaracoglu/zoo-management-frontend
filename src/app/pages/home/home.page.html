@@ -74,6 +74,12 @@
     <p>Learn more about our facilities, visiting hours and events.</p>
 
     <div class="info-grid">
+      <mat-card class="info-card" [routerLink]="'/explore-animals'" role="link" aria-label="Explore Animals">
+        <mat-icon>pets</mat-icon>
+        <h3>Explore Animals</h3>
+        <p>Discover our animals with photos and facts.</p>
+      </mat-card>
+
       <mat-card class="info-card">
         <mat-icon>schedule</mat-icon>
         <h3>Visiting Hours</h3>
@@ -97,6 +103,13 @@
         <h3>Zoo Map</h3>
         <p>Explore the layout and locations inside the zoo.</p>
       </mat-card>
+
+      <mat-card class="info-card" [routerLink]="'/faq'" role="link" aria-label="Go to Frequently Asked Questions Page">
+        <mat-icon>help_outline</mat-icon>
+        <h3>FAQs</h3>
+        <p>Find answers to common questions before your visit.</p>
+      </mat-card>
+
     </div>
   </section>
 </section>
