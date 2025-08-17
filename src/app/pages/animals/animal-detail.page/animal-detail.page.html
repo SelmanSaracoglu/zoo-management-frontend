@@ -30,47 +30,63 @@
         </div>
       </mat-tab>
 
-<mat-tab label="Feeding">
-  <div class="tab-pad">
-    <div class="feeding-header">
-      <button mat-flat-button color="primary" (click)="addFeeding()">
-        <mat-icon>add</mat-icon>
-        Add Feeding
-      </button>
-    </div>
-    
-    <mat-list *ngIf="feedings().length > 0; else empty">
-      <mat-list-item *ngFor="let f of feedings()">
-        <div matLine><strong>{{ f.timeOfDay }}</strong> – {{ f.food }} ({{ f.portion }})</div>
-        <div matLine *ngIf="f.notes">{{ f.notes }}</div>
-      </mat-list-item>
-    </mat-list>
-
-    <ng-template #empty>
-      <p>No feeding schedules available.</p>
-    </ng-template>
-  </div>
-</mat-tab>
-
+<!-- Health tab (güncel) -->
 <mat-tab label="Health">
   <div class="tab-pad">
-      <button mat-flat-button color="primary" (click)="addHealth()" style="margin-bottom: 12px;">
-        <mat-icon>add</mat-icon>
-        Add Health Record
-      </button>
-    <ng-container *ngIf="healthRecords().length > 0; else emptyHealth">
-      <div *ngFor="let h of healthRecords()" class="health-card">
-        <div class="card-header">
-          <span class="date">{{ h.recordDate }}</span>
-          <span class="type">{{ h.type }}</span>
+    <button mat-raised-button color="primary" (click)="openHealthDialog()">Add Health Check</button>
+
+    <ng-container *ngIf="health() as checks; else emptyHealth">
+      <div *ngIf="checks.length === 0; else list">No health checks found.</div>
+
+      <ng-template #list>
+        <div class="card" *ngFor="let h of checks">
+          <div class="card-header">
+            <span class="date">{{ h.checkTime | date:'yyyy-MM-dd HH:mm' }}</span>
+            <span class="spacer"></span>
+            <!-- (İsteğe bağlı) silme butonu
+            <button mat-icon-button color="warn" (click)="deleteHealthCheck(h.id)" aria-label="Delete health check">
+              <mat-icon>delete</mat-icon>
+            </button>
+            -->
+          </div>
+
+          <div class="condition" *ngIf="h.condition">🩺 {{ h.condition }}</div>
+          <div class="temp" *ngIf="h.temperatureC !== null && h.temperatureC !== undefined">🌡️ {{ h.temperatureC }} °C</div>
+          <div class="hr" *ngIf="h.heartRateBpm !== null && h.heartRateBpm !== undefined">❤️ {{ h.heartRateBpm }} bpm</div>
+          <div class="rr" *ngIf="h.respirationRpm !== null && h.respirationRpm !== undefined">💨 {{ h.respirationRpm }} rpm</div>
+          <div class="notes" *ngIf="h.notes">{{ h.notes }}</div>
         </div>
-        <div class="description">{{ h.description }}</div>
-        <div class="vet">👩‍⚕️ {{ h.veterinarianName }}</div>
-      </div>
+      </ng-template>
     </ng-container>
 
     <ng-template #emptyHealth>
-      <p>No health records found.</p>
+      <p>No health checks found.</p>
     </ng-template>
   </div>
 </mat-tab>
+
+<mat-tab label="Feed Log">
+  <div class="tab-pad">
+    <button mat-raised-button color="primary" (click)="addFeedLog()">Add Feed Log</button>
+
+    <ng-container *ngIf="feedLogs() as logs; else emptyFeed">
+      <div *ngIf="logs.length === 0; else list">No feed logs found.</div>
+      <ng-template #list>
+        <div class="card" *ngFor="let l of logs">
+          <div class="card-header">
+            <span class="date">{{ l.feedTime }}</span>
+            <span class="food">🍗 {{ l.foodItem }}</span>
+          </div>
+          <div class="qty" *ngIf="l.quantityGrams">⚖️ {{ l.quantityGrams }} g</div>
+          <div class="water" *ngIf="l.waterMilliliters">💧 {{ l.waterMilliliters }} ml</div>
+          <div class="notes" *ngIf="l.notes">{{ l.notes }}</div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #emptyFeed>
+      <p>No feed logs found.</p>
+    </ng-template>
+  </div>
+</mat-tab>
+

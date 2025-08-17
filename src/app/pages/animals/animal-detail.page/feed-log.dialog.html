@@ -1,0 +1,33 @@
+`
+  <h2 mat-dialog-title>New Feed Log</h2>
+  <div mat-dialog-content [formGroup]="form" class="grid gap-3">
+    <mat-form-field>
+      <mat-label>Feed Time</mat-label>
+      <input matInput type="datetime-local" formControlName="feedTime" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Food Item</mat-label>
+      <input matInput formControlName="foodItem" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Quantity (g)</mat-label>
+      <input matInput type="number" formControlName="quantityGrams">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Water (ml)</mat-label>
+      <input matInput type="number" formControlName="waterMilliliters">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Notes</mat-label>
+      <input matInput formControlName="notes">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">Save</button>
+  </div>
+  `

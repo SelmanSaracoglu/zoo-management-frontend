@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { RecordType, HealthRecordCreate } from '../../../models/health.model';
+import { HealthCheck, HealthCheckCreate } from '../../../models/health-check.model';
 
 @Component({
   standalone: true,
@@ -27,20 +27,30 @@ export class HealthDialog{
     dialogRef = inject(MatDialogRef<HealthDialog>);
 
 form = this.fb.group({
-  recordDate: [new Date(), Validators.required],
-  type: ['' as RecordType, Validators.required],
-  description: ['', Validators.required],
-  veterinarianName: ['', Validators.required],
+  checkTime: ['', Validators.required],  // datetime-local -> 'YYYY-MM-DDTHH:mm'
+  heartRateBpm: [null, [Validators.min(0)]],
+  temperatureC: [null],
+  respirationRpm: [null],
+  condition: [''],
+  notes: [''],
 });
 
-    recordTypes = Object.values(RecordType);
 
-    save(): void {
-        if (this.form.valid) {
-        this.dialogRef.close(this.form.value);
-    }
-        }
-    cancel(): void {
+save(): void {
+  if (this.form.invalid) return;
+  const v = this.form.value as any;
+  
+  const payload = {
+    ...v,
+    heartRateBpm: v.heartRateBpm != null ? Number(v.heartRateBpm) : null,
+    temperatureC: v.temperatureC != null ? Number(v.temperatureC) : null,
+    respirationRpm: v.respirationRpm != null ? Number(v.respirationRpm) : null,
+    checkTime: v.checkTime?.length === 16 ? v.checkTime + ':00' : v.checkTime, // saniye ekle
+  };
+  this.dialogRef.close(payload);
+}
+
+cancel(): void {
         this.dialogRef.close();
     }
 }

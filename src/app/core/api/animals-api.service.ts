@@ -8,7 +8,7 @@ import { Animal, AnimalCreate, AnimalUpdate } from '../../models/animal.model';
 @Injectable({ providedIn: 'root' })
 export class AnimalsApiService {
   private api = inject(ApiClientService);
-  private readonly base = '/animals';
+  private readonly base = '';
 
   /** GET /api/animals */
   list(): Observable<Animal[]> {

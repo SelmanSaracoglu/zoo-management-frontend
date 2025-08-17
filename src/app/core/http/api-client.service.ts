@@ -7,7 +7,7 @@ type Params = Record<string, string | number | boolean | null | undefined>;
 @Injectable({ providedIn: 'root' })
 export class ApiClientService {
   private http = inject(HttpClient);
-  private baseUrl = environment.apiUrl.replace(/\/$/, ''); // sonda / varsa temizle
+  private baseUrl = environment.apiBase.replace(/\/$/, '');
 
   private toParams(params?: Params) {
     if (!params) return undefined;

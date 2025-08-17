@@ -6,7 +6,7 @@ import { VisitorAnimal } from '../../models/animals-visitor.model';
 @Injectable({providedIn: 'root'})
 export class AnimalVisitorService {
   private api = inject(ApiClientService);
-  private readonly base = '/animals';
+  private readonly base = '';
 
   /** GET /api/animals */
   list(): Observable<VisitorAnimal[]> {

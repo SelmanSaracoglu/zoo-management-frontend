@@ -1,17 +1,18 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiClientService } from '../http/api-client.service';
-import { HealthRecord, HealthRecordCreate } from '../../models/health.model';
+import { HealthCheck, HealthCheckCreate  } from '../../models/health-check.model';
+
 
 @Injectable({ providedIn: 'root' })
 export class HealthApiService {
   private api = inject(ApiClientService);
 
-  list(animalId: number): Observable<HealthRecord[]> {
-    return this.api.get<HealthRecord[]>(`/animals/${animalId}/health-records`);
+  list(animalId: number): Observable<HealthCheck[]> {
+    return this.api.get<HealthCheck[]>(`/animals/${animalId}/health-checks`);
   }
 
-  create(animalId: number, body: HealthRecordCreate): Observable<HealthRecord> {
-    return this.api.post<HealthRecord>(`/animals/${animalId}/health-records`, body);
+  create(animalId: number, body: HealthCheckCreate): Observable<HealthCheck> {
+    return this.api.post<HealthCheck>(`/animals/${animalId}/health-checks`, body);
   }
 }
