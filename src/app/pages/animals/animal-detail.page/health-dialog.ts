@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HealthCheck, HealthCheckCreate } from '../../../models/health-check.model';
+import { HealthCheck, HealthCheckCreate } from '../../../features/animals/data-access/models/health-check.model';
 
 @Component({
   standalone: true,

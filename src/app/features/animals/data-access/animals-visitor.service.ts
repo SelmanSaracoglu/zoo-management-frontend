@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiClientService } from '../http/api-client.service';
-import { VisitorAnimal } from '../../models/animals-visitor.model';
+import { ApiClientService } from '../../../core/http/api-client.service';
+import { VisitorAnimal } from './models/animals-visitor.model';
 
 @Injectable({providedIn: 'root'})
 export class AnimalVisitorService {

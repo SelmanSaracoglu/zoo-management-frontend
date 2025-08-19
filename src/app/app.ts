@@ -1,5 +1,5 @@
 import { Component,inject, OnInit, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet, Route, Router, ActivatedRoute, NavigationEnd, } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { NgIf } from '@angular/common';
 import { LoadingService } from './core/ui/loading.service';
 import { filter, map } from 'rxjs';
 import { MainLayout } from './layout/main-layout/main-layout';
@@ -19,10 +18,9 @@ type NavItem = { label: string; icon: string; path: string };
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet, RouterLink, RouterLinkActive,
     MatToolbarModule, MatSidenavModule, MatListModule,
     MatIconModule, MatButtonModule, MatDividerModule, 
-    MatProgressBarModule, NgIf, MainLayout
+    MatProgressBarModule, MainLayout
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']

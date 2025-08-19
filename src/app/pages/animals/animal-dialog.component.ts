@@ -6,10 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { Diet, Gender, AnimalCreate, Animal } from '../../models/animal.model';
+import { Diet, Gender, AnimalCreate, Animal } from '../../features/animals/data-access/models/animal.model';
 import { NgFor, NgIf } from '@angular/common';
-
-
 
 type DialogData = {mode: 'create' | 'edit'; animal?: Animal};
 
@@ -29,19 +27,20 @@ export class AnimalDialogComponent {
     private ref = inject(MatDialogRef<AnimalDialogComponent, AnimalCreate | null>);
     data = inject<DialogData>(MAT_DIALOG_DATA, {optional:true}) ?? { mode:'create' }
 
-    diets = Object.values(Diet);
-    genders = Object.values(Gender);
+  // Union string types olduğu için sabit diziler kullan
+  readonly diets: Diet[] = ['CARNIVORE', 'HERBIVORE', 'OMNIVORE'];
+  readonly genders: Gender[] = ['MALE', 'FEMALE'];
 
     form = this.fb.nonNullable.group({
-        name: ['', [Validators.required, Validators.minLength(2)]],
-        type: ['', [Validators.required]],
-        diet: this.fb.nonNullable.control<Diet>(Diet.OMNIVORE, {validators: [Validators.required]}),
-        canWalk: this.fb.nonNullable.control<boolean>(true),
-        canSwim: this.fb.nonNullable.control<boolean>(false),
-        canFly:  this.fb.nonNullable.control<boolean>(false),
-        age: this.fb.nonNullable.control<number>(0, {validators: [Validators.required, Validators.min(0), Validators.max(200)]}),
-        gender: this.fb.nonNullable.control<Gender>(Gender.MALE, { validators: [Validators.required] }),
-        color: ['', []],
+      name: this.fb.nonNullable.control('', { validators: [Validators.required, Validators.minLength(2)] }),
+      species: this.fb.nonNullable.control('', { validators: [Validators.required] }),
+      habitat: this.fb.nonNullable.control('', { validators: [Validators.required] }),
+      diet: this.fb.nonNullable.control<Diet>('OMNIVORE', { validators: [Validators.required] }),
+      originCountry: this.fb.nonNullable.control('', { validators: [Validators.required] }),
+      age: this.fb.nonNullable.control(0, { validators: [Validators.required, Validators.min(0), Validators.max(200)] }),
+      gender: this.fb.nonNullable.control<Gender>('MALE', { validators: [Validators.required] }),
+      canSwim: this.fb.nonNullable.control(false),
+      canFly: this.fb.nonNullable.control(false),
     });
 
     get title() {

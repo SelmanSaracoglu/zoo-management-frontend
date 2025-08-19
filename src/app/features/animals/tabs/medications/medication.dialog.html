@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>New Medication</h2>
+<div mat-dialog-content class="grid">
+  <mat-form-field appearance="outline"><mat-label>Name</mat-label><input matInput formControlName="medName"></mat-form-field>
+  <mat-form-field appearance="outline"><mat-label>Dose</mat-label><input matInput formControlName="dose"></mat-form-field>
+  <mat-form-field appearance="outline"><mat-label>Route</mat-label><input matInput formControlName="route"></mat-form-field>
+  <mat-form-field appearance="outline"><mat-label>Given At</mat-label><input matInput type="datetime-local" formControlName="givenAt"></mat-form-field>
+  <mat-form-field appearance="outline" class="full"><mat-label>Reason</mat-label><input matInput formControlName="reason"></mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</div>

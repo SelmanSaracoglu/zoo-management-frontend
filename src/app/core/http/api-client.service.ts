@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Animal } from '../../features/animals/data-access/models/animal.model';
 
 type Params = Record<string, string | number | boolean | null | undefined>;
 

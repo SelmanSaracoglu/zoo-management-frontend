@@ -1,0 +1,18 @@
+<div class="tab-header">
+  <h3>Diet Plans</h3>
+  <button mat-raised-button color="primary" (click)="add()">Add Diet Plan</button>
+</div>
+
+<mat-list>
+  <mat-list-item *ngFor="let p of items">
+    <div matLine>
+      <strong>{{ p.startDate | date:'yyyy-MM-dd' }}</strong>
+      <ng-container *ngIf="p.endDate"> → {{ p.endDate | date:'yyyy-MM-dd' }}</ng-container>
+      — {{ p.caloriesKcal }} kcal
+    </div>
+    <div matLine *ngIf="p.notes">{{ p.notes }}</div>
+    <button mat-button color="warn" (click)="remove(p.id)">Delete</button>
+  </mat-list-item>
+</mat-list>
+
+<p *ngIf="!items?.length">No diet plans found.</p>

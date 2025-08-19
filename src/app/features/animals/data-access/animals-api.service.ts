@@ -2,13 +2,14 @@
 
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiClientService } from '../http/api-client.service';
-import { Animal, AnimalCreate, AnimalUpdate } from '../../models/animal.model';
+import { ApiClientService } from '../../../core/http/api-client.service';
+import { Animal, AnimalCreate, AnimalUpdate } from './models/animal.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AnimalsApiService {
-  private api = inject(ApiClientService);
-  private readonly base = '';
+  private api: ApiClientService = inject(ApiClientService);
+  private readonly base = '/api/animals';
 
   /** GET /api/animals */
   list(): Observable<Animal[]> {

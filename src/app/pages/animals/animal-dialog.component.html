@@ -1,5 +1,5 @@
 
-
+<form [formGroup]="form" (ngSubmit)="save()">
 <h2 mat-dialog-title>{{ title }}</h2>
 
 <div mat-dialog-content class="grid">
@@ -10,10 +10,11 @@
     <mat-error *ngIf="form.controls.name.hasError('minlength')">Minimum 2 characters.</mat-error>
   </mat-form-field>
 
+
   <mat-form-field appearance="outline">
-    <mat-label>Type</mat-label>
-    <input matInput formControlName="type" />
-    <mat-error *ngIf="form.controls.type.hasError('required')">Type is required.</mat-error>
+    <mat-label>Species</mat-label>
+    <input matInput formControlName="species" placeholder="e.g. Panthera leo" />
+    <mat-error *ngIf="form.controls.species.hasError('required')"> Species is required </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -40,13 +41,7 @@
     <mat-error *ngIf="form.controls.gender.hasError('required')">Gender is required.</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Color</mat-label>
-    <input matInput formControlName="color" />
-  </mat-form-field>
-
   <div class="checks">
-    <mat-checkbox formControlName="canWalk">Can walk</mat-checkbox>
     <mat-checkbox formControlName="canSwim">Can swim</mat-checkbox>
     <mat-checkbox formControlName="canFly">Can fly</mat-checkbox>
   </div>
@@ -56,3 +51,4 @@
   <button mat-button (click)="cancel()">Cancel</button>
   <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
 </div>
+</form>

@@ -1,0 +1,14 @@
+<div class="tab-header">
+  <h3>Weight Logs</h3>
+  <button mat-flat-button color="primary" (click)="add()">Add</button>
+</div>
+
+<mat-list>
+  <mat-list-item *ngFor="let w of items">
+    <div matLine><strong>{{ w.weightKg }}</strong> kg</div>
+    <div matLine>{{ w.loggedAt }} <span *ngIf="w.note">• {{ w.note }}</span></div>
+    <button mat-button color="warn" (click)="remove(w.id)">Delete</button>
+  </mat-list-item>
+</mat-list>
+
+<p *ngIf="!items?.length">No weight logs found.</p>

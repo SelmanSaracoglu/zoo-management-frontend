@@ -7,7 +7,7 @@
         <mat-label>Search animals</mat-label>
         <input
           matInput
-          placeholder="Name, type, diet, color"
+          placeholder="Name, diet"
           (keyup)="applyFilter($event)"
           [value]="filter()"
         />
@@ -41,10 +41,22 @@
             </td>
         </ng-container>
 
-        <!-- Type -->
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-          <td mat-cell *matCellDef="let a">{{ a.type }}</td>
+        <!-- Species -->
+        <ng-container matColumnDef="species">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Species </th>
+          <td mat-cell *matCellDef="let a">{{ a.species }}</td>
+        </ng-container>
+
+        <!-- Species -->
+        <ng-container matColumnDef="habitat">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Habitat </th>
+          <td mat-cell *matCellDef="let a">{{ a.habitat }}</td>
+        </ng-container>
+
+        <!-- Species -->
+        <ng-container matColumnDef="originCountry">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>OriginCountry </th>
+          <td mat-cell *matCellDef="let a">{{ a.originCountry }}</td>
         </ng-container>
 
         <!-- Diet -->
@@ -69,7 +81,6 @@
         <ng-container matColumnDef="abilities">
           <th mat-header-cell *matHeaderCellDef>Abilities</th>
           <td mat-cell *matCellDef="let a">
-            <mat-icon aria-label="walk" *ngIf="a.canWalk">directions_walk</mat-icon>
             <mat-icon aria-label="swim" *ngIf="a.canSwim">pool</mat-icon>
             <mat-icon aria-label="fly"  *ngIf="a.canFly">flight</mat-icon>
           </td>
@@ -79,7 +90,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let a">
-            <button mat-icon-button aria-label="Edit" (click)="edit(a)" disabled>
+            <button mat-icon-button aria-label="Edit" (click)="edit(a)">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="warn" aria-label="Delete" (click)="remove(a)" >

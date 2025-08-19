@@ -1,20 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { AnimalVisitorService } from '../../core/api/animals-visitor.service';
-import { VisitorAnimal } from '../../models/animals-visitor.model';
+import { VisitorAnimal } from '../../data-access/models/animals-visitor.model';
 import { ActivatedRoute } from '@angular/router';
 import { RouterLink, RouterModule } from '@angular/router';
-import { SnackbarService } from '../../core/ui/snackbar.service';
+import { SnackbarService } from '../../../../core/ui/snackbar.service';
+import { AnimalVisitorService } from '../../data-access';
+
 
 @Component({
-  selector: 'app-animals-explore',
+  selector: 'app-explore-page',
   standalone: true,
   imports: [CommonModule, MatCardModule, RouterModule],
-  templateUrl: './animals-explore.html',
-  styleUrls: ['./animals-explore.scss']
+  templateUrl: './explore.page.html',
+  styleUrls: ['./explore.page.scss']
 })
-export class AnimalsExplore {
+export class ExplorePage {
   private route = inject(ActivatedRoute)
   private animalService = inject(AnimalVisitorService);
   private snackbar = inject(SnackbarService);

@@ -7,7 +7,7 @@
 
     <h1 class="title">
       {{ a.name }}
-      <small>• {{ a.type }} • {{ a.gender }} • {{ a.diet }}</small>
+      <small>• {{ a.species }} • {{ a.gender }} • {{ a.diet }} • {{ a.originCountry }}</small>
     </h1>
   </div>
 
@@ -17,13 +17,11 @@
         <div class="tab-pad">
           <div class="kv">
             <div><strong>Age:</strong> {{ a.age }}</div>
-            <div><strong>Color:</strong> {{ a.color }}</div>
             <div><strong>Abilities:</strong>
               <ng-container>
-                <mat-icon *ngIf="a.canWalk" aria-label="Walk">directions_walk</mat-icon>
                 <mat-icon *ngIf="a.canSwim" aria-label="Swim">pool</mat-icon>
                 <mat-icon *ngIf="a.canFly"  aria-label="Fly">flight</mat-icon>
-                <span *ngIf="!a.canWalk && !a.canSwim && !a.canFly">None</span>
+                <span *ngIf="!a.canSwim && !a.canFly">No special locomotion</span>
               </ng-container>
             </div>
           </div>
@@ -89,4 +87,159 @@
     </ng-template>
   </div>
 </mat-tab>
+
+<mat-tab label="Medications">
+  <div class="tab-pad">
+    <button mat-raised-button color="primary" (click)="addMedication()">
+      Add Medication
+    </button>
+
+    <ng-container *ngIf="medications() as meds; else emptyMeds">
+      <div *ngIf="meds.length === 0; else medsList">No medications found.</div>
+
+      <ng-template #medsList>
+        <div class="card" *ngFor="let m of meds">
+          <div class="card-header">
+            <span class="date">{{ m.givenAt | date:'yyyy-MM-dd HH:mm' }}</span>
+            <span class="spacer"></span>
+            <!-- (opsiyonel) düzenleme -->
+            <!-- <button mat-icon-button (click)="editMedication(m)" aria-label="Edit"><mat-icon>edit</mat-icon></button> -->
+            <button mat-icon-button color="warn"
+                    (click)="deleteMedication(m.id)" aria-label="Delete medication">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <div class="line">
+            <strong>{{ m.medName }}</strong> — {{ m.dose }} / {{ m.route }}
+          </div>
+          <div class="notes" *ngIf="m.reason">{{ m.reason }}</div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #emptyMeds>
+      <p>No medications found.</p>
+    </ng-template>
+  </div>
+</mat-tab>
+
+<mat-tab label="Weight Logs">
+  <div class="tab-pad">
+    <div class="tab-header">
+      <h3>Weight Logs</h3>
+      <button mat-raised-button color="primary" (click)="addWeightLog()">
+        Add Weight Log
+      </button>
+    </div>
+
+    <ng-container *ngIf="weightLogs() as weights; else emptyWeight">
+      <div *ngIf="weights.length === 0; else weightList">No weight logs found.</div>
+
+      <ng-template #weightList>
+        <div class="card" *ngFor="let w of weights">
+          <div class="card-header">
+            <span class="date">{{ w.loggedAt | date:'yyyy-MM-dd HH:mm' }}</span>
+            <span class="spacer"></span>
+            <button mat-icon-button (click)="editWeightLog(w)" aria-label="Edit weight log">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteWeightLog(w.id)" aria-label="Delete weight log">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <div class="line"><strong>Weight:</strong> {{ w.weightKg | number:'1.2-2' }} kg</div>
+          <div class="notes" *ngIf="w.note">{{ w.note }}</div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #emptyWeight>
+      <p>No weight logs found.</p>
+    </ng-template>
+  </div>
+</mat-tab>
+
+<mat-tab label="Vet Visits">
+  <div class="tab-pad">
+    <button mat-raised-button color="primary" (click)="addVetVisit()">
+      Add Vet Visit
+    </button>
+
+    <ng-container *ngIf="vetVisits() as visits; else emptyVet">
+      <div *ngIf="visits.length === 0; else visitList">No vet visits found.</div>
+
+      <ng-template #visitList>
+        <div class="card" *ngFor="let v of visits">
+          <div class="card-header">
+            <span class="date">{{ v.visitTime | date:'yyyy-MM-dd HH:mm' }}</span>
+            <span class="spacer"></span>
+            <!-- (opsiyonel) düzenleme
+            <button mat-icon-button (click)="editVetVisit(v)" aria-label="Edit visit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            -->
+            <button mat-icon-button color="warn"
+                    (click)="deleteVetVisit(v.id)" aria-label="Delete visit">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <div class="line"><strong>{{ v.purpose }}</strong></div>
+          <div class="line" *ngIf="v.diagnosis">Dx: {{ v.diagnosis }}</div>
+          <div class="line" *ngIf="v.treatment">Tx: {{ v.treatment }}</div>
+          <div class="line" *ngIf="v.followUpOn">Follow-up: {{ v.followUpOn | date:'yyyy-MM-dd' }}</div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #emptyVet>
+      <p>No vet visits found.</p>
+    </ng-template>
+  </div>
+</mat-tab>
+
+<mat-tab label="Diet Plans">
+  <div class="tab-pad">
+    <button mat-raised-button color="primary" (click)="addDietPlan()">
+      Add Diet Plan
+    </button>
+
+    <ng-container *ngIf="dietPlans() as plans; else emptyDiet">
+      <div *ngIf="plans.length === 0; else planList">No diet plans found.</div>
+
+      <ng-template #planList>
+        <div class="card" *ngFor="let p of plans">
+          <div class="card-header">
+            <span class="date">
+              {{ p.startDate | date:'yyyy-MM-dd' }}
+              <ng-container *ngIf="p.endDate"> → {{ p.endDate | date:'yyyy-MM-dd' }}</ng-container>
+            </span>
+            <span class="spacer"></span>
+            <!-- (opsiyonel) edit
+            <button mat-icon-button (click)="editDietPlan(p)" aria-label="Edit plan">
+              <mat-icon>edit</mat-icon>
+            </button>
+            -->
+            <button mat-icon-button color="warn"
+                    (click)="deleteDietPlan(p.id)" aria-label="Delete plan">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <div class="line"><strong>Calories:</strong> {{ p.caloriesKcal }} kcal</div>
+          <div class="notes" *ngIf="p.notes">{{ p.notes }}</div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #emptyDiet>
+      <p>No diet plans found.</p>
+    </ng-template>
+  </div>
+</mat-tab>
+
+
+
 

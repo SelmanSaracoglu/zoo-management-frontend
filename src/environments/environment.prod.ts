@@ -1,5 +1,5 @@
 
 export const environment = {
-    production: true,
-    apiUrl: 'https://<prod-domain-or-ip>/api'
+  production: true,
+  apiBase: '' // arka uç aynı origin’deyse bırak; farklıysa tam URL ver
 };

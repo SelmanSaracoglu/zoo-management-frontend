@@ -1,28 +1,20 @@
 //Create TypeScript models that mirror your Spring Boot DTOs/entities, 
 //so HTTP calls are type-safe and your templates get IntelliSense.
 
-export enum Diet{
-  CARNIVORE = 'CARNIVORE',
-  HERBIVORE = 'HERBIVORE',
-  OMNIVORE = 'OMNIVORE',
-}
-
-export enum Gender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-}
+export type Diet = 'CARNIVORE' | 'HERBIVORE' | 'OMNIVORE';
+export type Gender = 'MALE' | 'FEMALE';
 
 export interface Animal {
   id: number;
   name: string;
-  type: string;
+  species: string;
+  habitat: string;
   diet: Diet;
-  canWalk: boolean;
-  canSwim: boolean;
-  canFly: boolean;
+  originCountry: string;
   age: number;
   gender: Gender;
-  color: string;
+  canSwim: boolean;
+  canFly: boolean;
 }
 
 /** Create DTO (POST /api/animals) */

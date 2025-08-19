@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiClientService } from '../http/api-client.service';
 import { Staff, StaffCreate } from '../../models/staff.model';
-import { Animal } from '../../models/animal.model';
+import { Animal } from '../../features/animals/data-access/models/animal.model';
 
 @Injectable({ providedIn: 'root' })
 export class StaffApiService {

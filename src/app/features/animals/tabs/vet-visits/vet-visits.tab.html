@@ -1,0 +1,18 @@
+<div class="tab-header">
+  <h3>Vet Visits</h3>
+  <button mat-raised-button color="primary" (click)="add()">Add Visit</button>
+</div>
+
+<mat-list>
+  <mat-list-item *ngFor="let v of items">
+    <div matLine>
+      <strong>{{ v.visitTime | date:'yyyy-MM-dd HH:mm' }}</strong> — {{ v.purpose }}
+    </div>
+    <div matLine *ngIf="v.diagnosis">Dx: {{ v.diagnosis }}</div>
+    <div matLine *ngIf="v.treatment">Tx: {{ v.treatment }}</div>
+    <div matLine *ngIf="v.followUpOn">Follow-up: {{ v.followUpOn | date:'yyyy-MM-dd' }}</div>
+    <button mat-button color="warn" (click)="remove(v.id)">Delete</button>
+  </mat-list-item>
+</mat-list>
+
+<p *ngIf="!items?.length">No vet visits found.</p>

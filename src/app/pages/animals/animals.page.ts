@@ -6,7 +6,7 @@ import {
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SnackbarService } from '../../core/ui/snackbar.service';
 import { AnimalDialogComponent } from '../animals/animal-dialog.component';
-import { Animal, AnimalCreate, AnimalUpdate } from '../../models/animal.model';
+import { Animal, AnimalCreate, AnimalUpdate } from '../../features/animals/data-access/models/animal.model';
 import { NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -16,9 +16,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AnimalsApiService } from '../../core/api/animals-api.service';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../shared/ui/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { AnimalVisitorService } from '../../features/animals/data-access/animals-visitor.service';
+import { AnimalsApiService } from '../../features/animals/data-access/animals-api.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -41,7 +45,7 @@ import { Router } from '@angular/router';
 export class AnimalsPage implements OnInit,AfterViewInit{
   // public API used by template
   displayedColumns: (keyof Animal | 'abilities' | 'actions') [] = 
-  ['name', 'type', 'diet', 'age', 'gender', 'abilities', 'actions'];
+  ['name', 'species', 'habitat', 'diet', 'originCountry', 'age', 'gender', 'abilities', 'actions'];
 
   dataSource = new MatTableDataSource<Animal>([]);
   filter = signal('');
@@ -78,10 +82,11 @@ export class AnimalsPage implements OnInit,AfterViewInit{
           if (!q) return true;
           return (
             row.name.toLowerCase().includes(q) ||
-            row.type.toLowerCase().includes(q) ||
+            row.species.toLowerCase().includes(q) ||
+            row.habitat.toLowerCase().includes(q) ||
             row.diet.toLowerCase().includes(q) ||
-            row.gender.toLowerCase().includes(q) ||
-            row.color.toLowerCase().includes(q)
+            row.originCountry.toLowerCase().includes(q) ||
+            row.gender.toLowerCase().includes(q)
           );
         };
         this.dataSource.filter = this.filter();
@@ -174,9 +179,11 @@ export class AnimalsPage implements OnInit,AfterViewInit{
     });
   }
 
-  openDetails(a: Animal): void {
+  openDetails(a: Animal) {
+    if(!a?.id) return;
   this.router.navigate(['/animals', a.id]);
 }
+
 }
 
     

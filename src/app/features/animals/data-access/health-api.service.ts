@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiClientService } from '../http/api-client.service';
-import { HealthCheck, HealthCheckCreate  } from '../../models/health-check.model';
+import { ApiClientService } from '../../../core/http/api-client.service';
+import { HealthCheck, HealthCheckCreate  } from './models/health-check.model';
 
 
 @Injectable({ providedIn: 'root' })

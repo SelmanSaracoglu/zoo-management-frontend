@@ -2,5 +2,5 @@
 
 export const environment = {
   production: false,
-  apiBase: '/api'
+  apiBase: '' // proxy üzerinden gider
 };

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>New Vet Visit</h2>
+<div mat-dialog-content class="grid">
+  <mat-form-field appearance="outline">
+    <mat-label>Visit Time</mat-label>
+    <input matInput type="datetime-local" formControlName="visitTime">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Purpose</mat-label>
+    <input matInput formControlName="purpose">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Diagnosis</mat-label>
+    <input matInput formControlName="diagnosis">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Treatment</mat-label>
+    <input matInput formControlName="treatment">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Follow-up On</mat-label>
+    <input matInput type="date" formControlName="followUpOn">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</div>

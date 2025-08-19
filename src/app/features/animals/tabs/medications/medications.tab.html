@@ -1,0 +1,14 @@
+<div class="tab-header">
+    <h3>Medications</h3>
+    <button mat-flat-button color="primary" (click)="add()">Add</button>
+</div>
+
+<mat-list>
+    <mat-list-item *ngFor="let m of items">
+        <div matLine><strong>{{ m.medName }}</strong> — {{ m.dose }} / {{ m.route }}</div>
+        <div matLine>{{ m.givenAt }} • {{ m.reason }}</div>
+        <button mat-button color="warn" (click)="remove(m.id)">Delete</button>
+    </mat-list-item>
+</mat-list>
+
+<p *ngIf="!items?.length">No medications found.</p>
