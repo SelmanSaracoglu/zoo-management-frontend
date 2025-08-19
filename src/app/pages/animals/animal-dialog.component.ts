@@ -1,69 +1,77 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, ChangeDetectionStrategy, Inject, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { Diet, Gender, AnimalCreate, Animal } from '../../features/animals/data-access/models/animal.model';
-import { NgFor, NgIf } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
+import { AnimalCreate } from '../../features/animals/data-access/models/animal.model';
+import { Animal } from '../../features/animals/data-access/models/animal.model';
 
-type DialogData = {mode: 'create' | 'edit'; animal?: Animal};
+
+export interface AnimalDialogData { mode: 'create'|'edit'; animal?: Animal; }
 
 @Component({
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    ReactiveFormsModule, NgFor, NgIf,
-    MatDialogModule, MatFormFieldModule, MatInputModule,
-    MatSelectModule, MatCheckboxModule, MatButtonModule
+    CommonModule, ReactiveFormsModule, MatDialogModule,
+    MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatSelectModule,
   ],
   templateUrl: './animal-dialog.component.html',
   styleUrls: ['./animal-dialog.component.scss']
 })
 
+
+
 export class AnimalDialogComponent {
-    private fb = inject(FormBuilder);
-    private ref = inject(MatDialogRef<AnimalDialogComponent, AnimalCreate | null>);
-    data = inject<DialogData>(MAT_DIALOG_DATA, {optional:true}) ?? { mode:'create' }
+  data = inject(MAT_DIALOG_DATA) as AnimalDialogData;
+  ref = inject(MatDialogRef<AnimalDialogComponent, any>);
+  private fb = inject(FormBuilder);
 
-  // Union string types olduğu için sabit diziler kullan
-  readonly diets: Diet[] = ['CARNIVORE', 'HERBIVORE', 'OMNIVORE'];
-  readonly genders: Gender[] = ['MALE', 'FEMALE'];
+  // ✅ String literal seçenekleri — Diet/Gender tip hatasını bitirir
+  readonly diets   = ['CARNIVORE', 'HERBIVORE', 'OMNIVORE'] as const;
+  readonly genders = ['MALE', 'FEMALE'] as const;
 
-    form = this.fb.nonNullable.group({
-      name: this.fb.nonNullable.control('', { validators: [Validators.required, Validators.minLength(2)] }),
-      species: this.fb.nonNullable.control('', { validators: [Validators.required] }),
-      habitat: this.fb.nonNullable.control('', { validators: [Validators.required] }),
-      diet: this.fb.nonNullable.control<Diet>('OMNIVORE', { validators: [Validators.required] }),
-      originCountry: this.fb.nonNullable.control('', { validators: [Validators.required] }),
-      age: this.fb.nonNullable.control(0, { validators: [Validators.required, Validators.min(0), Validators.max(200)] }),
-      gender: this.fb.nonNullable.control<Gender>('MALE', { validators: [Validators.required] }),
-      canSwim: this.fb.nonNullable.control(false),
-      canFly: this.fb.nonNullable.control(false),
+
+    form = this.fb.group({
+      name: ['', Validators.required],
+      species: ['', Validators.required],
+      habitat: [''],
+      // Eğer MatSelect ile liste kullanıyorsan string kontrol uygun
+      diet: this.fb.nonNullable.control<string>('OMNIVORE', { validators: [Validators.required] }),
+      originCountry: [''],
+      age: [null as number | null],
+      gender: this.fb.nonNullable.control<string>('MALE', { validators: [Validators.required] }),
+      canSwim: [false],
+      canFly: [false],
     });
 
-    get title() {
-        return this.data?.mode === 'edit' ? 'Edit_Animal' : 'Add Animal';
+    constructor(){
+      const a = this.data?.animal;
+      if (a) {
+        this.form.patchValue({
+        name: a.name ?? '',
+        species: a.species ?? '',
+        habitat: a.habitat ?? '',
+        diet: a.diet ?? '',
+        originCountry: a.originCountry ?? '',
+        age: a.age ?? null,
+        gender: a.gender ?? '',
+        canSwim: !!a.canSwim,
+        canFly: !!a.canFly,
+      });
     }
+  }
 
-    constructor() {
-    // If edit mode, patch values (we’ll use this in Step 3C.2)
-    if (this.data?.mode === 'edit' && this.data.animal) {
-      const { id, ...rest } = this.data.animal;
-      this.form.patchValue(rest);
-        }
-    }
-    
-    save() {
-    if (this.form.invalid) return;
-    const payload: AnimalCreate = this.form.getRawValue();
-    this.ref.close(payload);
-    }
-    cancel() {
-    this.ref.close(null);
-    }
-        
+  get isEdit(): boolean {
+  return this.data?.mode === 'edit';
 }
-
+    
+    save()   { if (this.form.valid) this.ref.close(this.form.value); }
+    cancel() { this.ref.close(null); }
+      
+}
 

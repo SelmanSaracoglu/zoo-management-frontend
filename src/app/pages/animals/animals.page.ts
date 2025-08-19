@@ -23,6 +23,8 @@ import { AnimalsApiService } from '../../features/animals/data-access/animals-ap
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -32,10 +34,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgIf,
-    MatCardModule,
-    MatTableModule, MatSortModule, MatPaginatorModule,
-    MatFormFieldModule, MatInputModule,
-    MatIconModule, MatButtonModule, MatDialogModule
+    MatCardModule,MatTableModule, MatSortModule, MatPaginatorModule,
+    MatFormFieldModule, MatInputModule,MatIconModule, MatButtonModule, MatDialogModule, FormsModule
   ],
   templateUrl: './animals.page.html',
   styleUrls: ['./animals.page.scss'],
@@ -59,7 +59,9 @@ export class AnimalsPage implements OnInit,AfterViewInit{
   private snack = inject(SnackbarService);
   private router = inject(Router);
 
-    ngOnInit(): void {
+  searchText = '';
+
+  ngOnInit(): void {
     this.reload();
   }
 
@@ -69,7 +71,21 @@ export class AnimalsPage implements OnInit,AfterViewInit{
     this.dataSource.paginator = this.paginator;
   }
 
-    public reload(): void {
+  triggerSearch(): void {
+    this.filter.set(this.searchText ?? '');
+    this.dataSource.filter = this.filter();
+    this.dataSource.paginator?.firstPage();
+  }
+
+  // Butondan temizlik
+  clearSearch(): void {
+    this.searchText = '';
+    this.filter.set('');
+    this.dataSource.filter = '';
+    this.dataSource.paginator?.firstPage();
+  }
+
+  public reload(): void {
     this.api.list().subscribe({
       next: (items) => {
         this.dataSource = new MatTableDataSource(items ?? []);
@@ -130,6 +146,8 @@ export class AnimalsPage implements OnInit,AfterViewInit{
       });
     });
   }
+
+
   // placeholders for next steps
   edit(a: Animal): void {
     const ref = this.dialog.open<AnimalDialogComponent, any, AnimalCreate>(AnimalDialogComponent, {
@@ -183,6 +201,7 @@ export class AnimalsPage implements OnInit,AfterViewInit{
     if(!a?.id) return;
   this.router.navigate(['/animals', a.id]);
 }
+
 
 }
 

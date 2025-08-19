@@ -3,18 +3,18 @@
     <mat-card-title>Animals</mat-card-title>
 
     <div class="toolbar">
-      <mat-form-field appearance="outline" class="filter">
+      <mat-form-field appearance="outline" class="search">
         <mat-label>Search animals</mat-label>
-        <input
-          matInput
-          placeholder="Name, diet"
-          (keyup)="applyFilter($event)"
-          [value]="filter()"
-        />
-        <button mat-icon-button matSuffix aria-label="Clear" (click)="clearFilter()" *ngIf="filter()">
-          <mat-icon>close</mat-icon>
+        <input matInput [(ngModel)]="searchText" (keyup.enter)="triggerSearch()" placeholder="name / species / diet ...">
+        <button *ngIf="searchText" matSuffix mat-icon-button (click)="clearSearch()" aria-label="Clear">
+        <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
+
+      <button mat-stroked-button (click)="triggerSearch()">
+        <mat-icon>search</mat-icon>
+        Search
+      </button>
 
       <span class="spacer"></span>
 
